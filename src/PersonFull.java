@@ -65,7 +65,7 @@ public final class PersonFull implements MovingEntity {
     public Point nextPosition(WorldModel world, Point destPos) {
         PathingStrategy strat = new AStarPathingStrategy();
         List<Point> path = strat.computePath(position, destPos,
-                p -> (world.withinBounds(p)) && (world.getOccupant(p).isEmpty() || world.getOccupant(p).get().getClass() == Stump.class),
+                p -> (world.withinBounds(p)) && (world.getOccupant(p).isEmpty()),
                 Point::adjacent,
                 PathingStrategy.CARDINAL_NEIGHBORS);
 
