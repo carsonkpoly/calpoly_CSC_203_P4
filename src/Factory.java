@@ -28,6 +28,10 @@ public final class Factory {
         return new House(id, position, images);
     }
 
+    public static Entity createRuin(String id, Point position, List<PImage> images) {
+        return new Ruin(id, position, images);
+    }
+
     public static Entity createObstacle(String id, Point position, double animationPeriod, List<PImage> images) {
         return new Obstacle(id, position, images, 0, animationPeriod);
     }

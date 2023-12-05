@@ -6,7 +6,7 @@ import processing.core.PImage;
  * An entity that exists in the world. See EntityKind for the
  * different kinds of entities that exist.
  */
-public final class Ruin implements Executioner {
+public final class Ruin implements Entity {
     //    private final EntityKind kind;
     private final String id;
     private Point position;
@@ -47,4 +47,5 @@ public final class Ruin implements Executioner {
     public void setPosition(Point pos) {
         this.position = pos;
     }
+
 }
