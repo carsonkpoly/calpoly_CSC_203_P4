@@ -69,6 +69,10 @@ public final class Factory {
         return new PersonSearching(id, position, images, resourceLimit, 0, actionPeriod, animationPeriod);
     }
 
+    public static Entity createAnt(String id, Point pos, List<PImage> images, double actionPeriod, double animationPeriod) {
+        return new Ant(id, pos, images, actionPeriod, animationPeriod);
+    }
+
     // don't technically need resource count ... full
     public static Entity createPersonFull(String id, Point position, double actionPeriod, double animationPeriod, int resourceLimit, List<PImage> images) {
         return new PersonFull(id, position, images, resourceLimit, actionPeriod, animationPeriod);

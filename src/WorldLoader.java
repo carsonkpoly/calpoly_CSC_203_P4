@@ -25,6 +25,10 @@ public class WorldLoader {
     private static final int FAIRY_ANIMATION_PERIOD = 1;
     private static final int FAIRY_ACTION_PERIOD = 0;
     private static final int FAIRY_NUM_PROPERTIES = 2;
+    private static final String ANT_KEY = "ant";
+    private static final int ANT_ANIMATION_PERIOD = 1;
+    private static final int ANT_ACTION_PERIOD = 0;
+    private static final int ANT_NUM_PROPERTIES = 2;
     private static final int TREE_ANIMATION_PERIOD = 1;
     private static final int TREE_ACTION_PERIOD = 0;
     private static final int TREE_HEALTH = 2;
@@ -99,6 +103,7 @@ public class WorldLoader {
                 case TREE_KEY -> parseTree(world, properties, pt, id, imageStore);
                 case SAPLING_KEY -> parseSapling(world, properties, pt, id, imageStore);
                 case STUMP_KEY -> parseStump(world, properties, pt, id, imageStore);
+                case ANT_KEY -> parseAnt(world, properties, pt, id, imageStore);
                 default -> throw new IllegalArgumentException("Entity key is unknown");
             }
         }else{
@@ -130,6 +135,15 @@ public class WorldLoader {
             world.tryAddEntity(entity);
         }else{
             throw new IllegalArgumentException(String.format("%s requires %d properties when parsing", FAIRY_KEY, FAIRY_NUM_PROPERTIES));
+        }
+    }
+
+    private static void parseAnt(WorldModel world, String[] properties, Point pt, String id, ImageStore imageStore) {
+        if (properties.length == ANT_NUM_PROPERTIES) {
+            Entity entity = Factory.createAnt(id, pt, imageStore.getImageList(ANT_KEY), Double.parseDouble(properties[ANT_ACTION_PERIOD]), Double.parseDouble(properties[ANT_ANIMATION_PERIOD]));
+            world.tryAddEntity(entity);
+        }else{
+            throw new IllegalArgumentException(String.format("%s requires %d properties when parsing", ANT_KEY, ANT_NUM_PROPERTIES));
         }
     }
 
