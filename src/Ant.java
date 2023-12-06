@@ -36,10 +36,10 @@ public final class Ant implements MovingEntity {
 
             if (moveTo(world, antTarget.get(), scheduler)) {
                 // @TODO: support ruin functionality
-//                Entity ruin = Factory.createRuin(WorldLoader.RUIN_KEY + "_" + antTarget.get().getId(), tgtPos, imageStore.getImageList(WorldLoader.RUIN_KEY));
-//
-//                world.tryAddEntity(ruin);
-//                ((HealthEntity)ruin).scheduleActions(scheduler, world, imageStore);
+                Entity ruin = Factory.createRuin(WorldLoader.RUIN_KEY + "_" + antTarget.get().getId(), tgtPos, imageStore.getImageList(WorldLoader.RUIN_KEY));
+
+                world.tryAddEntity(ruin);
+//                ((Entity)ruin).scheduleActions(scheduler, world, imageStore);
             }
         }
 

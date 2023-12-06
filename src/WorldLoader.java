@@ -21,6 +21,8 @@ public class WorldLoader {
     private static final int PERSON_NUM_PROPERTIES = 3;
     private static final String HOUSE_KEY = "house";
     private static final int HOUSE_NUM_PROPERTIES = 0;
+    public static final String RUIN_KEY = "ruin";
+    private static final int RUIN_NUM_PROPERTIES = 0;
     private static final String FAIRY_KEY = "fairy";
     private static final int FAIRY_ANIMATION_PERIOD = 1;
     private static final int FAIRY_ACTION_PERIOD = 0;
@@ -104,6 +106,7 @@ public class WorldLoader {
                 case PERSON_KEY -> parsePerson(world, properties, pt, id, imageStore);
                 case FAIRY_KEY -> parseFairy(world, properties, pt, id, imageStore);
                 case HOUSE_KEY -> parseHouse(world, properties, pt, id, imageStore);
+                case RUIN_KEY -> parseAntFighter(world, properties, pt, id, imageStore);
                 case TREE_KEY -> parseTree(world, properties, pt, id, imageStore);
                 case SAPLING_KEY -> parseSapling(world, properties, pt, id, imageStore);
                 case STUMP_KEY -> parseStump(world, properties, pt, id, imageStore);
@@ -185,6 +188,15 @@ public class WorldLoader {
             world.tryAddEntity(entity);
         }else{
             throw new IllegalArgumentException(String.format("%s requires %d properties when parsing", HOUSE_KEY, HOUSE_NUM_PROPERTIES));
+        }
+    }
+
+    private static void parseRuin(WorldModel world, String[] properties, Point pt, String id, ImageStore imageStore) {
+        if (properties.length == RUIN_NUM_PROPERTIES) {
+            Entity entity = Factory.createRuin(id, pt, imageStore.getImageList(RUIN_KEY));
+            world.tryAddEntity(entity);
+        }else{
+            throw new IllegalArgumentException(String.format("%s requires %d properties when parsing", RUIN_KEY, RUIN_NUM_PROPERTIES));
         }
     }
 
