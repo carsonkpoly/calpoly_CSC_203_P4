@@ -6,20 +6,19 @@ import processing.core.PImage;
  * An entity that exists in the world. See EntityKind for the
  * different kinds of entities that exist.
  */
-public final class House implements Entity {
-//    private final EntityKind kind;
+public final class Ruin implements Entity {
+    //    private final EntityKind kind;
     private final String id;
     private Point position;
     private final List<PImage> images;
     private int imageIndex;
 
-    public House(String id, Point position, List<PImage> images) {
+    public Ruin(String id, Point position, List<PImage> images) {
         this.id = id;
         this.position = position;
         this.images = images;
         this.imageIndex = 0;
     }
-
 
     public void nextImage() {
         imageIndex = imageIndex + 1;
@@ -48,6 +47,5 @@ public final class House implements Entity {
     public void setPosition(Point pos) {
         this.position = pos;
     }
-
 
 }

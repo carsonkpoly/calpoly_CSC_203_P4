@@ -32,7 +32,7 @@ public final class PersonFull implements MovingEntity {
 
     public void executeAction(WorldModel world, ImageStore imageStore, EventScheduler scheduler) {
         Optional<Entity> fullTarget = world.findNearest(position, new ArrayList<>(List.of(House.class)));
-
+        // check if there is a ruin that we can go to a ruin (find nearest),
         if (fullTarget.isPresent() && moveTo(world, fullTarget.get(), scheduler)) {
             transformFull(world, scheduler, imageStore);
         } else {
@@ -48,6 +48,8 @@ public final class PersonFull implements MovingEntity {
         world.tryAddEntity(dude);
         ((ActionEntity)dude).scheduleActions(scheduler, world, imageStore);
     }
+
+
 
     public boolean moveTo(WorldModel world, Entity target, EventScheduler scheduler) {
         if (position.adjacent(target.getPosition())) {
@@ -65,7 +67,7 @@ public final class PersonFull implements MovingEntity {
     public Point nextPosition(WorldModel world, Point destPos) {
         PathingStrategy strat = new AStarPathingStrategy();
         List<Point> path = strat.computePath(position, destPos,
-                p -> (world.withinBounds(p)) && (world.getOccupant(p).isEmpty() || world.getOccupant(p).get().getClass() == Stump.class),
+                p -> (world.withinBounds(p)) && (world.getOccupant(p).isEmpty()),
                 Point::adjacent,
                 PathingStrategy.CARDINAL_NEIGHBORS);
 
