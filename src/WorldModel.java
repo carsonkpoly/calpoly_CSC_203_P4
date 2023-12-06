@@ -48,7 +48,7 @@ public final class WorldModel {
         this.removeEntityAt(entity.getPosition());
     }
 
-    private void removeEntityAt(Point pos) {
+    public void removeEntityAt(Point pos) {
         if (withinBounds(pos) && this.getOccupancyCell(pos) != null) {
             Entity entity = this.getOccupancyCell(pos);
 

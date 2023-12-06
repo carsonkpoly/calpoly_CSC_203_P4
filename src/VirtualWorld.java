@@ -7,8 +7,8 @@ import processing.core.*;
 public final class VirtualWorld extends PApplet {
     private static String[] ARGS;
 
-    private static final int VIEW_WIDTH = 640;
-    private static final int VIEW_HEIGHT = 480;
+    private static final int VIEW_WIDTH = 1280;
+    private static final int VIEW_HEIGHT = 800;
     private static final int TILE_WIDTH = 32;
     private static final int TILE_HEIGHT = 32;
 
@@ -64,7 +64,7 @@ public final class VirtualWorld extends PApplet {
         scheduler.updateOnTime(frameTime);
     }
 
-    // Just for debugging and for P5
+    // Just for debugging and for P4
     // Be sure to refactor this method as appropriate
     public void mousePressed() {
         Point pressed = mouseToPoint();
