@@ -56,7 +56,14 @@ public final class PersonFull implements MovingEntity {
         ((ActionEntity)dude).scheduleActions(scheduler, world, imageStore);
     }
 
+    public void transformFighter(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
+        Entity dude = Factory.createAntFighter(id, position, images, actionPeriod, animationPeriod);
 
+        world.removeEntity(scheduler, this);
+
+        world.tryAddEntity(dude);
+        ((ActionEntity)dude).scheduleActions(scheduler, world, imageStore);
+    }
 
     public boolean moveTo(WorldModel world, Entity target, EventScheduler scheduler) {
         if (position.adjacent(target.getPosition())) {
