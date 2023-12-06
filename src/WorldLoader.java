@@ -19,7 +19,7 @@ public class WorldLoader {
     private static final int PERSON_ANIMATION_PERIOD = 1;
     private static final int PERSON_LIMIT = 2;
     private static final int PERSON_NUM_PROPERTIES = 3;
-    private static final String HOUSE_KEY = "house";
+    public static final String HOUSE_KEY = "house";
     private static final int HOUSE_NUM_PROPERTIES = 0;
     public static final String RUIN_KEY = "ruin";
     private static final int RUIN_NUM_PROPERTIES = 0;
