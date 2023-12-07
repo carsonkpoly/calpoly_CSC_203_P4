@@ -95,6 +95,10 @@ public final class VirtualWorld extends PApplet {
                     else if (thing instanceof PersonEntity) {
                         ((PersonEntity) thing).transformFighter(world, scheduler, imageStore);
                     }
+                    else if (thing instanceof Obstacle && Math.random() > 0.5) {
+                        // just for fun, have 50% chance to convert obstacle tiles
+                        world.removeEntityAt(cur);
+                    }
                 }
             }
         }
