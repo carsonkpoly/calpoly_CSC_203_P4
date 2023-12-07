@@ -125,7 +125,7 @@ public final class WorldModel {
      * @param pos - the location we are checking
      * @return true if location is both in bounds and occupied.
      */
-    private boolean isInBoundsAndOccupied(Point pos) {
+    public boolean isInBoundsAndOccupied(Point pos) {
         return withinBounds(pos) && this.getOccupancyCell(pos) != null;
     }
 

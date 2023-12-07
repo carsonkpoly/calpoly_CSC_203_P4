@@ -33,7 +33,19 @@ public final class AntFighter implements MovingEntity {
 
         if (fightTarget.isPresent() && moveTo(world, fightTarget.get(), scheduler)) {
             world.removeEntityAt(fightTarget.get().getPosition());
-        } else {
+
+            Entity dude = Factory.createPersonSearching(id, position, actionPeriod, animationPeriod, 4, imageStore.getImageList(WorldLoader.PERSON_KEY));
+            world.removeEntity(scheduler, this);
+            world.tryAddEntity(dude);
+            ((ActionEntity)dude).scheduleActions(scheduler, world, imageStore);
+        }
+        else if (fightTarget.isEmpty()) {
+            Entity dude = Factory.createPersonSearching(id, position, actionPeriod, animationPeriod, 4, imageStore.getImageList(WorldLoader.PERSON_KEY));
+            world.removeEntity(scheduler, this);
+            world.tryAddEntity(dude);
+            ((ActionEntity)dude).scheduleActions(scheduler, world, imageStore);
+        }
+        else {
             scheduler.scheduleEvent(this, Factory.createActivityAction(this, world, imageStore), actionPeriod);
         }
     }

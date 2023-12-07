@@ -6,7 +6,7 @@ import processing.core.PImage;
  * An entity that exists in the world. See EntityKind for the
  * different kinds of entities that exist.
  */
-public final class PersonFull implements MovingEntity {
+public final class PersonFull implements PersonEntity {
 //    private final EntityKind kind;
     private final String id;
     private Point position;
@@ -41,7 +41,13 @@ public final class PersonFull implements MovingEntity {
                 world.removeEntity(scheduler, target.get());
                 world.tryAddEntity(house);
             }
-            transformFull(world, scheduler, imageStore);
+            Optional<Entity> fightTarget = world.findNearest(position, new ArrayList<>(List.of(Ant.class)));
+            if (fightTarget.isEmpty()) {
+                transformFull(world, scheduler, imageStore);
+            }
+            else {
+                transformFighter(world, scheduler, imageStore);
+            }
         } else {
             scheduler.scheduleEvent(this, Factory.createActivityAction(this, world, imageStore), actionPeriod);
         }
@@ -57,12 +63,12 @@ public final class PersonFull implements MovingEntity {
     }
 
     public void transformFighter(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
-        Entity dude = Factory.createAntFighter(id, position, images, actionPeriod, animationPeriod);
+        Entity dude = Factory.createAntFighter(id, position, imageStore.getImageList(WorldLoader.FIGHTER_KEY), actionPeriod, animationPeriod);
 
         world.removeEntity(scheduler, this);
 
         world.tryAddEntity(dude);
-        ((ActionEntity)dude).scheduleActions(scheduler, world, imageStore);
+        ((AntFighter)dude).scheduleActions(scheduler, world, imageStore);
     }
 
     public boolean moveTo(WorldModel world, Entity target, EventScheduler scheduler) {

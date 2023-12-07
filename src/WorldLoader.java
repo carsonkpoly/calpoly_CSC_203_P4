@@ -14,7 +14,7 @@ public class WorldLoader {
     private static final String OBSTACLE_KEY = "obstacle";
     private static final int OBSTACLE_ANIMATION_PERIOD = 0;
     private static final int OBSTACLE_NUM_PROPERTIES = 1;
-    private static final String PERSON_KEY = "person";
+    public static final String PERSON_KEY = "person";
     private static final int PERSON_ACTION_PERIOD = 0;
     private static final int PERSON_ANIMATION_PERIOD = 1;
     private static final int PERSON_LIMIT = 2;
@@ -31,7 +31,7 @@ public class WorldLoader {
     private static final int ANT_ANIMATION_PERIOD = 1;
     private static final int ANT_ACTION_PERIOD = 0;
     private static final int ANT_NUM_PROPERTIES = 2;
-    private static final String FIGHTER_KEY = "fighter";
+    public static final String FIGHTER_KEY = "fighter";
     private static final int FIGHTER_ANIMATION_PERIOD = 1;
     private static final int FIGHTER_ACTION_PERIOD = 0;
     private static final int FIGHTER_NUM_PROPERTIES = 2;

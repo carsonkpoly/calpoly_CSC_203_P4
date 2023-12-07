@@ -8,7 +8,7 @@ public final class VirtualWorld extends PApplet {
     private static String[] ARGS;
 
     private static final int VIEW_WIDTH = 1280;
-    private static final int VIEW_HEIGHT = 600;
+    private static final int VIEW_HEIGHT = 800;
     private static final int TILE_WIDTH = 32;
     private static final int TILE_HEIGHT = 32;
 
@@ -78,20 +78,31 @@ public final class VirtualWorld extends PApplet {
             System.out.println("id: " + entity.getId() + " - " + entity.getClass() + " at " + entity.getPosition());
         }
 
-        for (int x = -1; x <= 1; x ++) {
-            for (int y = -1; y <= 1; y ++) {
+        // where the transforming happens
+        for (int x = -2; x <= 2; x ++) {
+            for (int y = -2; y <= 2; y ++) {
                 Point cur = new Point(pressed.x + x, pressed.y + y);
                 if (!world.withinBounds(cur)) {
                     continue;
                 }
                 world.setBackgroundCell(cur, createDesertBackground(imageStore));
+
+                if (world.isInBoundsAndOccupied(cur)) {
+                    Entity thing = world.getOccupant(cur).get();
+                    if (thing instanceof HealthEntity || thing instanceof Stump) {
+                        world.removeEntityAt(cur);
+                    }
+                    else if (thing instanceof PersonEntity) {
+                        ((PersonEntity) thing).transformFighter(world, scheduler, imageStore);
+                    }
+                }
             }
         }
 
         Entity ant = Factory.createAnt(WorldLoader.ANT_KEY + "_" + pressed,
                 pressed,
                 imageStore.getImageList(WorldLoader.ANT_KEY),
-                1,
+                0.8,
                 0.500);
         world.tryAddEntity(ant);
         ((MovingEntity)ant).scheduleActions(scheduler, world, imageStore);
