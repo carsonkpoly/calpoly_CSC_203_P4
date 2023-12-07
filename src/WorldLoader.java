@@ -27,7 +27,7 @@ public class WorldLoader {
     private static final int FAIRY_ANIMATION_PERIOD = 1;
     private static final int FAIRY_ACTION_PERIOD = 0;
     private static final int FAIRY_NUM_PROPERTIES = 2;
-    private static final String ANT_KEY = "ant";
+    public static final String ANT_KEY = "ant";
     private static final int ANT_ANIMATION_PERIOD = 1;
     private static final int ANT_ACTION_PERIOD = 0;
     private static final int ANT_NUM_PROPERTIES = 2;
