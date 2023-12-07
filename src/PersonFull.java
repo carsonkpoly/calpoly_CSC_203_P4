@@ -31,9 +31,16 @@ public final class PersonFull implements MovingEntity {
     }
 
     public void executeAction(WorldModel world, ImageStore imageStore, EventScheduler scheduler) {
-        Optional<Entity> fullTarget = world.findNearest(position, new ArrayList<>(List.of(House.class)));
-        // check if there is a ruin that we can go to a ruin (find nearest),
-        if (fullTarget.isPresent() && moveTo(world, fullTarget.get(), scheduler)) {
+        // Find the nearest House to target
+        Optional<Entity> target = world.findNearest(position, new ArrayList<>(List.of(House.class, Ruin.class)));
+        // check if there is a ruin that we can go to a ruin (find nearest)
+        if (target.isPresent() && moveTo(world, target.get(), scheduler)) {
+            if (target.get().getClass() == Ruin.class) {
+                Entity house = Factory.createHouse(WorldLoader.HOUSE_KEY + "_" + target.get().getId(),
+                        target.get().getPosition(), imageStore.getImageList(WorldLoader.HOUSE_KEY));
+                world.removeEntity(scheduler, target.get());
+                world.tryAddEntity(house);
+            }
             transformFull(world, scheduler, imageStore);
         } else {
             scheduler.scheduleEvent(this, Factory.createActivityAction(this, world, imageStore), actionPeriod);
@@ -49,7 +56,14 @@ public final class PersonFull implements MovingEntity {
         ((ActionEntity)dude).scheduleActions(scheduler, world, imageStore);
     }
 
+    public void transformFighter(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
+        Entity dude = Factory.createAntFighter(id, position, images, actionPeriod, animationPeriod);
 
+        world.removeEntity(scheduler, this);
+
+        world.tryAddEntity(dude);
+        ((ActionEntity)dude).scheduleActions(scheduler, world, imageStore);
+    }
 
     public boolean moveTo(WorldModel world, Entity target, EventScheduler scheduler) {
         if (position.adjacent(target.getPosition())) {

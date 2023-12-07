@@ -8,7 +8,7 @@ public final class VirtualWorld extends PApplet {
     private static String[] ARGS;
 
     private static final int VIEW_WIDTH = 1280;
-    private static final int VIEW_HEIGHT = 800;
+    private static final int VIEW_HEIGHT = 600;
     private static final int TILE_WIDTH = 32;
     private static final int TILE_HEIGHT = 32;
 
