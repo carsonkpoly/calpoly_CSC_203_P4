@@ -17,6 +17,8 @@ public final class VirtualWorld extends PApplet {
 
     private static final String IMAGE_LIST_FILE_NAME = "imagelist";
     private static final String DEFAULT_IMAGE_NAME = "background_default";
+    private static final String DESERT_IMAGE_NAME = "background_desert";
+
     private static final int DEFAULT_IMAGE_COLOR = 0x808080;
 
     private static final String FAST_FLAG = "-fast";
@@ -76,6 +78,23 @@ public final class VirtualWorld extends PApplet {
             System.out.println("id: " + entity.getId() + " - " + entity.getClass() + " at " + entity.getPosition());
         }
 
+        for (int x = -1; x <= 1; x ++) {
+            for (int y = -1; y <= 1; y ++) {
+                Point cur = new Point(pressed.x + x, pressed.y + y);
+                if (!world.withinBounds(cur)) {
+                    continue;
+                }
+                world.setBackgroundCell(cur, createDesertBackground(imageStore));
+            }
+        }
+
+        Entity ant = Factory.createAnt(WorldLoader.ANT_KEY + "_" + pressed,
+                pressed,
+                imageStore.getImageList(WorldLoader.ANT_KEY),
+                1,
+                0.500);
+        world.tryAddEntity(ant);
+        ((MovingEntity)ant).scheduleActions(scheduler, world, imageStore);
     }
 
     private Point mouseToPoint() {
@@ -99,6 +118,10 @@ public final class VirtualWorld extends PApplet {
 
     public static Background createDefaultBackground(ImageStore imageStore) {
         return new Background(DEFAULT_IMAGE_NAME, imageStore.getImageList(DEFAULT_IMAGE_NAME));
+    }
+
+    public static Background createDesertBackground(ImageStore imageStore) {
+        return new Background(DESERT_IMAGE_NAME, imageStore.getImageList(DESERT_IMAGE_NAME));
     }
 
     public static PImage createImageColored(int width, int height, int color) {
